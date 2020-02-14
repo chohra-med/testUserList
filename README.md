@@ -1,9 +1,9 @@
-# Mentor List
+# Users List 
 
-> A React-Native Application that shows a List of Mentor with different functionalities
+> A React-Native Application that shows a List of Users with different functionalities
 
 
-> tags: #react-native #ES6 #BABEL
+> tags: #react-native #ES6 #BABEL #Prettier #ESLINT 
 >
 Simple List          |  Search List By Name
 :-------------------------:|:-------------------------:
@@ -20,29 +20,43 @@ Second Screen         |  Swipeout Images
 
 > Features
 
-- Sort the List by Name
 - Search and Filter by Name 
-- Change Language 
-- Adding new data at the end of the list
+- Support different Languages
+- Show a user
+-Different user's pics
 - Refresh the List
 
 > Structure 
 
 - /src
     - assets:  containts all the assets (Image, Icons...)
-    - Components: our Component which is the ListView Class and its Style Class
-    - config : we put our configuration on the folder "right now it is empty"
+    - views: our views which is the startingScreen, homescreen and other two screens 
+    - Components: our Component That are used in many views
+    - config : we put our configuration on the folder such as keys, for the purpose of the test, 
+    we made it accessible and we push it to the github
     - locales: for changing the language using i18n
-    - Utils: if we have some Components that are used in different components
-- /__tests __ : where we put our tests
+    - theme: our Theme variable
+    - Redux : 
+    
+            - action: action folder 
+            - reducer: reducer folder
+            - logics: our funtions that calls the actions
+            - actionTypes: different Action types
+            - initialState: our initial state
+            - rootReducer: our Root Reducer 
+            - configureStore: our Store- /__tests __ : where we put our tests
     
 
 
-## Installation
+## Installation 
 
 - yarn install
-- react-native link
+- yarn link-ios 
 - yarn ios or yarn android
+## Create .apk or  .aab
+
+- yarn install
+- yarn create-apk or yarn create-aab 
 
 
 ## Support

@@ -5,14 +5,14 @@ const textSize = height > 600 ? 14 : 10;
 
 export default {
   // FONT FAMILY
-  FONT_FAMILY_PRIMARY: Platform.select({
-    android: 'Aquawax Light Trial',
-    ios: 'Aquawax-Light',
-  }),
-  FONT_FAMILY_SECONDARY: Platform.select({
-    android: 'CenturyGothic',
-    ios: 'CenturyGothic',
-  }),
+  // FONT_FAMILY_PRIMARY: Platform.select({
+  //   android: 'Aquawax Light Trial',
+  //   ios: 'Aquawax-Light',
+  // }),
+  // FONT_FAMILY_SECONDARY: Platform.select({
+  //   android: 'CenturyGothic',
+  //   ios: 'CenturyGothic',
+  // }),
   // FONT SIZE
   SIZE_SMALL: textSize,
   SIZE_MEDIUM: textSize + 3,

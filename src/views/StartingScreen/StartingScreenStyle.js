@@ -22,15 +22,8 @@ export default (styles = StyleSheet.create({
     top: height / 1.8,
     margin: 40,
   },
-  textConnection: {
-    fontFamily: theme.FONT_FAMILY_PRIMARY,
-    fontSize: textSize * 1.3,
-    color: theme.BLACK,
-    position: 'absolute',
-    top: height / 1.5,
-  },
+
   textCopyright: {
-    fontFamily: theme.FONT_FAMILY_SECONDARY,
     fontSize: textSize,
     fontStyle: 'normal',
     color: theme.DEFAULT,

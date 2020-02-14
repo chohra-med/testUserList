@@ -1,5 +1,5 @@
 import {StyleSheet, Platform, Dimensions} from 'react-native';
-import theme from '../../../theme';
+import theme from '../../theme';
 
 const {width, height} = Dimensions.get('window');
 const textSize = (height > 600) ? 30 : 24;
@@ -17,7 +17,6 @@ export default stylesHeader = StyleSheet.create({
     },
     centerComponent: {
         color: theme.DARK,
-        fontFamily: theme.FONT_FAMILY_PRIMARY,
         fontSize: textSize / 1.2,
         fontWeight: 'bold',
     },
