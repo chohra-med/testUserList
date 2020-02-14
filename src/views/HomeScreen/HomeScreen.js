@@ -35,7 +35,7 @@ class HomeScreen extends Component {
 
     onRefresh() {
         this.setState({isFetching: true}, async () => {
-            await this.props.getUserList('');
+            await this.props.getUserList('da');
             let newUserArray = Object.entries(this.props.users).map(function ([key, v]) {
                 return v;
             });
@@ -125,9 +125,7 @@ class HomeScreen extends Component {
     }
 
     updateSearch = nameFiltered => {
-        this.setState({nameFiltered}, () => {
-            this.filterBy();
-        });
+        this.setState({nameFiltered});
     };
 
     render() {
@@ -149,6 +147,10 @@ class HomeScreen extends Component {
                             value={nameFiltered}
                             inputContainerStyle={styles.searchinputContainerStyle}
                             lightTheme={true}
+                            searchIcon={{
+                                icon: 'magnify', color: 'black', size: 24,
+                                onPress: this.filterBy,
+                            }}
                         />
                     }
                     centerContainerStyle={styles.centerComponent}

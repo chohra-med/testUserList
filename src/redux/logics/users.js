@@ -8,13 +8,12 @@ import Unsplash, { toJson } from "unsplash-js";
 import {Access_Key, Secret_Key} from '../../config';
 
 const unsplash = new Unsplash({
-
     accessKey: Access_Key,
     secret: Secret_Key
 });
 
 export const fetchUserList = data => dispatch =>
-    unsplash.search.users('cho', 1)
+    unsplash.search.users(data, 1)
         .then(toJson)
         .then(json => {
           let users=json.results;

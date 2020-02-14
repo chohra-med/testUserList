@@ -22,7 +22,7 @@ class StartingScreen extends Component {
     this.setState({loading: true}, async () => {
       try {
         setAuthorizationToken(Access_Key);
-        await getUserList('');
+        await getUserList('da');
         setTimeout(() => {
               Actions.home({type: 'reset'});
             },
