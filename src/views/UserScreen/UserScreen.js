@@ -1,81 +1,33 @@
 import React, {PureComponent} from 'react';
 import {SafeAreaView, ScrollView, Share, Text, TouchableOpacity, View} from 'react-native';
-import styles from './PostScreenStyle';
-import SliderImages from '../../HomeScreen/ListView/SliderImages';
+import styles from './UserScreenStyles';
+import SliderImages from '../../components/SliderImages/SliderImages';
 import {Avatar, Divider} from 'react-native-elements';
-import LikeComentShareComponent from '../../Utilities/LikeComentShareComponent';
-import {fetchUserList} from '../../redux/logics/users';
 import {connect} from 'react-redux';
 
 
-export default class PostScreen extends PureComponent {
+ class UserScreen extends PureComponent {
 
     constructor(props) {
         super(props);
         this.state = {
             newComments: [],
         };
-        this.onShare = this.onShare.bind(this);
     }
+async componentDidMount() {
+    await this.props.getPhotos(this.props.username);
+}
 
-    onShare = async () => {
+
+     render() {
         let {
-            companyName,
-            text,
-        } = this.props.data;
-        try {
-            const result = await Share.share({
-                message:
-                    `what an offer from ${companyName}, look what they said: ${text}`,
-                title: companyName,
-            });
-        } catch (error) {
-            console.log('error', error);
-        }
-    };
-
-    renderComment = (name, post, index) => {
-        return (
-            <View style={styles.oneCommentContainer} key={index}>
-                <View style={styles.commentView}>
-                    <Avatar rounded title={name[0] + name[1]} size="medium"/>
-                    <View style={styles.topCommentSide}>
-                        <Text style={styles.commentName}> {name}</Text>
-                        <Text style={styles.commentText}>{post}</Text>
-                    </View>
-                </View>
-                <Divider style={styles.dividerComment}/>
-
-            </View>
-        );
-    };
-    updateElement = (data) => {
-        let {newComments} = this.state;
-        newComments.push(data);
-        this.setState({newComments});
-    };
-
-    render() {
-        let {
-            createdBy,
-            images,
-            post,
+            first_name,
+            last_name,
+            bio,
             _id,
-            comments,
-            canComment,
-            likedBy,
+            profile_image
         } = this.props.data;
-
-        let {
-            userName,
-            typeOffers,
-
-        } = this.props;
-        let {
-            name,
-            logoUrl,
-        } = createdBy;
-
+        let images=this.props.photos;
         return (
             <SafeAreaView style={styles.mainView}>
                 <ScrollView
@@ -87,12 +39,12 @@ export default class PostScreen extends PureComponent {
                         <Avatar
                             source={{
                                 uri:
-                                logoUrl,
+                                profile_image.medium,
                             }}
                             size={'small'}
                         />
                         <Text style={styles.companyName}>
-                            {name}
+                            {last_name + first_name}
                         </Text>
                     </TouchableOpacity>
                     <View style={{}}>
@@ -102,38 +54,12 @@ export default class PostScreen extends PureComponent {
                     </View>
                     <View style={styles.components}>
                         <Text style={styles.textPost}>
-                            {post}
+                            {bio}
                         </Text>
 
                     </View>
-                    <View style={styles.commentContainer}>
-                        {comments.map((item, index) =>
-                            this.renderComment(
-                                item.userName || 'Ch',
-                                item.comment,
-                                index,
-                            ),
-                        )}{this.state.newComments.map((item, index) =>
-                        this.renderComment(
-                            item.userName || 'Ch',
-                            item.comment,
-                            index,
-                        ),
-                    )}
-                    </View>
-                    <LikeComentShareComponent
-                        data={{
-                            name,
-                            _id,
-                            userName,
-                            post,
-                            type: typeOffers,
-                            likedBy,
-                            canComment,
-                        }}
-                        onComment={this.updateElement}
 
-                    />
+
 
                 </ScrollView>
             </SafeAreaView>
@@ -153,4 +79,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps,
-)(HomeScreen);
+)(UserScreen);

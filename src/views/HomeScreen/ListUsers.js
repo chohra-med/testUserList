@@ -20,10 +20,9 @@ export default class ListUsers extends PureComponent {
     onPress() {
         let {data} = this.props;
         alert('clicked');
-        // Actions.retailPageScreen({
-        //     data: data,
-        //     config: this.props.config,
-        // });
+        Actions.userScreen({
+            data: data,
+        });
     };
 
     render() {
@@ -41,7 +40,8 @@ export default class ListUsers extends PureComponent {
                 style={styles.listViewContainer}>
                 <SliderImages
                     onPress={this.onPress}
-                    images={[profile_image.large]} heightComponent={0.09}
+                    images={[profile_image.large]}
+                    heightComponent={0.09}
                     widthComponent={0.3}
                 />
                 <View style={styles.textContainer}>
