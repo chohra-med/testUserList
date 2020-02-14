@@ -10,11 +10,10 @@ const unsplash = new Unsplash({
     secret: Secret_Key
 });
 
-export const fetchUserList = data => dispatch =>
+export const fetchPhotosList = data => dispatch =>
     unsplash.users.photos(data, 1, 10, "popular", false)
         .then(toJson)
-        .then(json => {
-            let photos=json.results;
+        .then(photos => {
             dispatch(fetchPhotosListAction(photos));
             return photos;
         });

@@ -4,6 +4,8 @@ import styles from './UserScreenStyles';
 import SliderImages from '../../components/SliderImages/SliderImages';
 import {Avatar, Divider} from 'react-native-elements';
 import {connect} from 'react-redux';
+import {fetchPhotosListAction} from '../../redux/actions/photos';
+import {fetchPhotosList} from '../../redux/logics/photos';
 
 
  class UserScreen extends PureComponent {
@@ -15,7 +17,7 @@ import {connect} from 'react-redux';
         };
     }
 async componentDidMount() {
-    await this.props.getPhotos(this.props.username);
+    await this.props.getPhotos(this.props.data.username);
 }
 
 
@@ -27,7 +29,10 @@ async componentDidMount() {
             _id,
             profile_image
         } = this.props.data;
-        let images=this.props.photos;
+        let images=Object.entries(this.props.photos).map(function ([k,v]) {
+            return v.urls.regular
+
+        });
         return (
             <SafeAreaView style={styles.mainView}>
                 <ScrollView
@@ -73,7 +78,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getPhotos: (data) => dispatch(fetch(data)),
+    getPhotos: (data) => dispatch(fetchPhotosList(data)),
 });
 
 export default connect(
