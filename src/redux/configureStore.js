@@ -1,9 +1,9 @@
-import { createStore, applyMiddleware } from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
-import { persistStore, persistReducer } from 'redux-persist';
+import {persistStore, persistReducer} from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import {composeWithDevTools} from 'redux-devtools-extension';
 import rootReducer from './rootReducer';
 
 const IS_DEV = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
@@ -15,7 +15,7 @@ const persistConfig = {
   key: 'root',
   keyPrefix: 'zones',
   storage: AsyncStorage,
-  whitelist: ['auth', 'config', 'specificProperties','properties'],
+  whitelist: ['photos', 'users'],
   // blacklist: ['sample'],
   // stateReconciler: autoMergeLevel2,
 };
@@ -29,13 +29,16 @@ if (IS_DEV) {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export default () => {
-  const store = createStore(persistedReducer, composeWithDevTools(
-    applyMiddleware(...middlewares),
-    // other store enhancers if any
-  ));
+  const store = createStore(
+    persistedReducer,
+    composeWithDevTools(
+      applyMiddleware(...middlewares),
+      // other store enhancers if any
+    ),
+  );
 
   const persistor = persistStore(store);
 
   // persistor.purge();
-  return { store, persistor };
+  return {store, persistor};
 };

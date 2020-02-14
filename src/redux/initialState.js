@@ -1,32 +1,7 @@
 export default {
   // UI local configuration
-  signUp: {},
+  photos: {},
   // diff information (when login)
-  auth: {
-    token: '',
-    user: {},
-    company: {},
-    plan: {},
-    isSignUp: '',
-  },
-  // config fetched from the server
-  config: {},
-  // properties
-  properties: {},
+  users: {}
 
-  specificProperties: {
-    likedProperties: [],
-    myProperties: [],
-    followedProperties: [],
-    latestPics:[],
-  },
-  wall: {
-    offers: [],
-    upComing: [],
-    articles: [],
-    myPosts:[],
-
-  },
-  // to add
-  summary: {},
 };

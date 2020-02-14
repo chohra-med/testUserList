@@ -1,31 +1,27 @@
 import React, {Component} from 'react';
-import {
-  Text,
-  Image,
-  SafeAreaView,
-  I18nManager,
-  ActivityIndicator,
-} from 'react-native';
+import {Text, Image, SafeAreaView, ActivityIndicator} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import styles from './StartingScreenStyle';
 import {strings} from '../../locales/i18n';
 import {LOGO} from '../../assets/images';
-import {fetchUserList} from '../../redux/logics/user';
+import {fetchUserList} from '../../redux/logics/users';
+import {setAuthorizationToken} from '../../redux/service/setAuthToken';
+import {Access_Key} from '../../config';
 
 class StartingScreen extends Component {
   constructor(props) {
     super(props);
-    this.state={
-        loading:true,
-    }
+    this.state = {
+      loading: true,
+    };
   }
 
   componentDidMount() {
     const {getUserList} = this.props;
-
     this.setState({loading: true}, async () => {
       try {
+        setAuthorizationToken(Access_Key);
         await getUserList();
         Actions.tabbar({type: 'reset'});
       } catch (e) {

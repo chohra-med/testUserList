@@ -1,7 +1,7 @@
-import { Dimensions, Platform } from 'react-native';
+import {Dimensions, Platform} from 'react-native';
 
-const { height } = Dimensions.get('window');
-const textSize = (height > 600) ? 14 : 10;
+const {height} = Dimensions.get('window');
+const textSize = height > 600 ? 14 : 10;
 
 export default {
   // FONT FAMILY
