@@ -1,7 +1,7 @@
 import {StyleSheet, Dimensions} from 'react-native';
 import theme from '../../theme';
 
-const {width,height} = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 
 const textSize = height > 600 ? 14 : 10;
 
@@ -14,20 +14,18 @@ export default (styles = StyleSheet.create({
         marginBottom: 40,
     },
     containerStyle: {
-        backgroundColor: theme.WHITE,
-        borderBottomColor: theme.GREY_WHITE,
+        backgroundColor: theme.GREY_WHITE,
         width,
         paddingVertical: 16,
         borderBottomWidth: textSize / 8,
     },
     centerComponent: {
-        flexDirection: 'row',
-        justifyContent: 'center',
+        width:width*0.7,
+        flex:5
+    },
+    searchinputContainerStyle:{
+        width:width*0.7,
 
     },
-    searchLoop:{
-
-
-    }
 
 }));

@@ -5,7 +5,7 @@ export const BASE_NAME = IS_DEV ? '' : '/testUserList';
 
 // TODO: set backend URL
 // const URL = 'http://localhost:4000';
-const URL = 'https://zone-properties.herokuapp.com';
+const URL = 'https://api.unsplash.com/';
 
 export const API = (model = undefined, id = undefined) => {
   if (model && id) {

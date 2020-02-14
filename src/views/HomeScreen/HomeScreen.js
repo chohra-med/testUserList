@@ -1,22 +1,20 @@
 import React, {Component} from 'react';
 import {
     Text,
-    Image,
     SafeAreaView,
-    I18nManager,
-    ActivityIndicator,
     FlatList,
-    TextInput,
-    View, Dimensions,
+    View,
+    Dimensions,
 } from 'react-native';
 import {connect} from 'react-redux';
 import styles from './HomeScreenStyles';
 import {strings} from '../../locales/i18n';
 import {fetchUserList} from '../../redux/logics/users';
 import ListUsers from './ListUsers';
-import {Header, Input} from 'react-native-elements';
-import Icon from '../../components/nativeIcon';
+import {Header, Input, SearchBar} from 'react-native-elements';
 import theme from '../../theme';
+import _ from 'lodash';
+import Icon from '../../components/nativeIcon';
 
 const {width, height} = Dimensions.get('window');
 
@@ -37,9 +35,62 @@ class HomeScreen extends Component {
 
     onRefresh() {
         this.setState({isFetching: true}, async () => {
-            await this.props.getUserList();
-            let newUserArray=Object.entries(this.props.users).map(function ([key,v]) {
-                return  v;
+            await this.props.getUserList('');
+            let newUserArray = Object.entries(this.props.users).map(function ([key, v]) {
+                return v;
+            });
+
+            this.setState({
+                    isFetching: false,
+                    userList: newUserArray,
+                    nameFiltered: '',
+                },
+            );
+        });
+    }
+
+    renderBlankElement() {
+        return (
+            <View style={{
+                alignItems: 'center',
+                height: height * 0.4,
+                marginTop: height * 0.15,
+                justifyContent: 'space-between',
+            }}>
+                <View style={{alignItems: 'center'}}>
+                    <Icon
+                        name="shield-search"
+                        size={width / 5}
+                        color="#76236c"
+                        style={{padding: 3}}
+                    />
+                    <Text style={{
+                        fontSize:  27,
+                        color: theme.BLACK,
+                    }}>
+                        Not Found !!!
+                    </Text>
+                    <Text style={{
+                        color: '#333',
+                        fontSize: 15,
+                        fontWeight: '500',
+                        marginBottom: 15,
+                    }}>
+                        Pull to initialize the list
+                    </Text>
+                </View>
+
+            </View>
+        );
+    }
+
+
+//to filter our data by NAME
+    filterBy() {
+        this.setState({isFetching: true}, async () => {
+            await this.props.getUserList(this.state.nameFiltered);
+            let newUserArray = Object.entries(this.props.users).map(function ([key, v]) {
+                return v;
             });
 
             this.setState({
@@ -50,25 +101,14 @@ class HomeScreen extends Component {
         });
     }
 
-
-//to filter our data by NAME
-    filterBy() {
-        let {
-            nameFiltered,
-        } = this.state;
-        let userList=Object.entries(this.props.users).map(function ([key,v]) {
-            return  v;
-        });
-        let data = userList;
-        data = data.filter(x => String(x.name.toUpperCase()).includes(nameFiltered.toUpperCase()));
-        this.setState({userList: data});
-    }
-
     //to order our data by NAME
     orderBy() {
-        let data = this.state.ourData;
-        data = _.sortBy(data, ['name', 'id']);
-        this.setState({ourData: data});
+        let userList = Object.entries(this.props.users).map(function ([key, v]) {
+            return v;
+        });
+        let data = userList;
+        data = _.sortBy(data, ['name', '_id']);
+        this.setState({userList: data});
     }
 
     componentDidMount() {
@@ -78,10 +118,17 @@ class HomeScreen extends Component {
         let newUserArray = Object.entries(users).map(function ([key, v]) {
             return v;
         });
+        console.log(newUserArray);
         this.setState({
             userList: newUserArray,
         });
     }
+
+    updateSearch = nameFiltered => {
+        this.setState({nameFiltered}, () => {
+            this.filterBy();
+        });
+    };
 
     render() {
         let {photos} = this.props;
@@ -91,53 +138,34 @@ class HomeScreen extends Component {
         return (
             <SafeAreaView style={styles.container}>
                 <Header
-                    // leftComponent={{icon: 'menu', color: '#fff'}}
+                    leftComponent={{
+                        icon: 'sort', color: '#76236c', size: 24,
+                        onPress: this.orderBy,
+                    }}
                     centerComponent={
-                        <View style={styles.centerComponent}
-                            >
-                            <TextInput
-                                style={{
-                                    height: 40, borderWidth: 2, margin: 5, width: width*0.5,
-                                }}
-                                placeholder={strings('home.filtering')}
-                                value={nameFiltered}
-                                onChangeText={(nameFiltered) => {
-                                    this.setState({nameFiltered});
-                                    this.filterBy;
-                                }}
-                            />
-
-                            <Icon color='black' size={18} name="magnify"
-                                  onPress={this.filterBy}
-
-                                  style={styles.searchLoop}
-                            />
-                        </View>
+                        <SearchBar
+                            placeholder={strings('home.seachplaceholder')}
+                            onChangeText={this.updateSearch}
+                            value={nameFiltered}
+                            inputContainerStyle={styles.searchinputContainerStyle}
+                            lightTheme={true}
+                        />
                     }
+                    centerContainerStyle={styles.centerComponent}
                     containerStyle={styles.containerStyle}
-                    rightComponent={{icon: 'home', color: theme.GREY_WHITE}}
                 />
                 <FlatList
                     data={data}
-                    // ListHeaderComponent={() =>
-                    //     <View style={styles.headerImage}>
-                    //       <SliderImages
-                    //                     images={photos}
-                    //                     heightComponent={0.24}
-                    //                     widthComponent={0.9}
-                    //       />
-                    //     </View>
-                    // }
                     renderItem={({item}) =>
                         <ListUsers data={item}/>
                     }
-
-                    keyExtractor={item => item._id.toString()}
+                    keyExtractor={item => item.id.toString()}
                     getItemLayout={(data, index) => (
                         {length: height * 0.2, offset: height * 0.05, index}
                     )}
                     onRefresh={this.onRefresh}
                     refreshing={isFetching}
+                    ListEmptyComponent={this.renderBlankElement}
 
                 />
             </SafeAreaView>
@@ -150,7 +178,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getUserList: () => dispatch(fetchUserList()),
+    getUserList: (data) => dispatch(fetchUserList(data)),
 });
 
 export default connect(

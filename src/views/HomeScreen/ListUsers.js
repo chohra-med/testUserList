@@ -12,7 +12,8 @@ export default class ListUsers extends PureComponent {
         super(props);
         this.onPress = this.onPress.bind(this);
     }
-
+    componentDidMount(){
+    }
 
     onPress() {
         let {data} = this.props;
@@ -25,12 +26,11 @@ export default class ListUsers extends PureComponent {
 
     render() {
         let {
-            name,
-            images,
-            title,
-
+            first_name,
+            last_name,
+            profile_image,
+            bio,
         } = this.props.data;
-
 
         return (
             <>
@@ -39,19 +39,15 @@ export default class ListUsers extends PureComponent {
                     <View style={styles.listViewContainer}>
                         <SliderImages
                             onPress={this.onPress}
-                            images={images} heightComponent={0.09}
+                            images={[profile_image.large]} heightComponent={0.09}
                             widthComponent={0.3}
                         />
                         <View style={styles.textContainer}>
-                            <Text style={styles.name}>{name}</Text>
-                            <Text style={styles.title}> {title}</Text>
+                            <Text style={styles.name}>{first_name+ last_name}</Text>
+                            <Text style={styles.title}> {bio}</Text>
 
                         </View>
-                        <Icon name="arrow-right" style={styles.button}
-                              color='black'
-                              size={32}
-                              onPress={this.onPress}
-                        />
+
                     </View>
 
                 </TouchableOpacity>
@@ -66,9 +62,10 @@ const styles = StyleSheet.create({
     listViewContainer: {
         flexDirection: 'row',
         flex: 1,
-        width: width,
         height: height*0.1,
         justifyContent: 'center',
+        alignSelf:'center',
+        margin:10
     },
     button: {
         marginTop: height*0.05,
@@ -76,20 +73,21 @@ const styles = StyleSheet.create({
         right: 16,
     },
     name: {
-        fontSize: textSize,
+        fontSize: textSize*1.2,
         color: theme.BLACK,
         fontWeight:theme.WEIGHT_HEAVY
     },
     title:{
-        fontSize: textSize-5,
+        fontSize: textSize-10,
         color: theme.DEFAULT,
-        fontWeight:theme.WEIGHT_MEDIUM
+        fontWeight:theme.WEIGHT_MEDIUM,
+        margin:3,
 
     },
     textContainer: {
         flexDirection: 'column',
         margin: 10,
-
+        marginTop:15,
     },
 
 });

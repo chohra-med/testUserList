@@ -22,7 +22,7 @@ class StartingScreen extends Component {
     this.setState({loading: true}, async () => {
       try {
         setAuthorizationToken(Access_Key);
-        await getUserList();
+        await getUserList('');
         setTimeout(() => {
               Actions.home({type: 'reset'});
             },
@@ -57,7 +57,7 @@ class StartingScreen extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  getUserList: () => dispatch(fetchUserList()),
+  getUserList: (data) => dispatch(fetchUserList(data)),
 });
 
 export default connect(

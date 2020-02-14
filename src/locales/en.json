@@ -2,5 +2,8 @@
   "starting": {
     "verifyConnection": "Verifying the internet connection …",
     "copyright": "copyright © All Rights Reserved 2019"
+  },
+  "home": {
+    "seachplaceholder": "Type here to search",
   }
 }
