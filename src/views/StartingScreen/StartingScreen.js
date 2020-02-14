@@ -23,7 +23,10 @@ class StartingScreen extends Component {
       try {
         setAuthorizationToken(Access_Key);
         await getUserList();
-        Actions.tabbar({type: 'reset'});
+        setTimeout(() => {
+              Actions.home({type: 'reset'});
+            },
+            300);
       } catch (e) {
         if (
           e.response &&

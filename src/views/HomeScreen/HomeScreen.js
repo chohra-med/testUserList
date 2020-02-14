@@ -7,7 +7,7 @@ import {
     ActivityIndicator,
     FlatList,
     TextInput,
-    View,
+    View, Dimensions,
 } from 'react-native';
 import {connect} from 'react-redux';
 import styles from './HomeScreenStyles';
@@ -16,6 +16,8 @@ import {fetchUserList} from '../../redux/logics/users';
 import ListUsers from './ListUsers';
 import {Header, Input} from 'react-native-elements';
 import Icon from '../../components/nativeIcon';
+import theme from '../../theme';
+const {width,height} = Dimensions.get('window');
 
 class HomeScreen extends Component {
     constructor(props) {
@@ -42,8 +44,8 @@ class HomeScreen extends Component {
                 },
             );
         });
-
     }
+
 
 //to filter our data by NAME
     filterBy() {
@@ -62,7 +64,20 @@ class HomeScreen extends Component {
         data = _.sortBy(data, ['name', 'id']);
         this.setState({ourData: data});
     }
+
     componentDidMount() {
+        let {
+            users,
+        } = this.props;
+        console.log(users);
+
+            let newUserArray=Object.entries(users).map(function ([key,v]) {
+                return  v;
+            });
+            console.log(newUserArray)
+        this.setState({
+            userList: newUserArray
+        });
     }
 
     render() {
@@ -73,16 +88,18 @@ class HomeScreen extends Component {
         return (
             <SafeAreaView style={styles.container}>
                 <Header
-                    placement="left"
-                    leftComponent={{icon: 'menu', color: '#fff'}}
+                    // leftComponent={{icon: 'menu', color: '#fff'}}
                     centerComponent={
                         <View style={{
                             flexDirection: 'row',
                             justifyContent: 'center',
+                            backgroundColor: 'blue',
                         }}>
                             <TextInput
-                                style={{height: 40, borderWidth: 2, margin: 5, width: '60%'}}
-                                placeholder={I18n.t('filtering')}
+                                style={{
+                                    height: 40, borderWidth: 10, margin: 5, width: '100%',
+                                }}
+                                placeholder={strings('home.filtering')}
                                 value={nameFiltered}
                                 onChangeText={(nameFiltered) => {
                                     this.setState({nameFiltered});
@@ -90,19 +107,21 @@ class HomeScreen extends Component {
                                 }}
                             />
 
-                                <Icon color='black' size={20} name="search"
-                                      onPress={this.filterBy}
-                                      style={{
-                                          width: 30,
-                                          justifyContent: 'center',
-                                          borderRadius: 20,
-                                          borderColor: 'grey',
-                                          margin: 6,
-                                      }}
-                                />
+                            <Icon color='black' size={20} name="search"
+                                  onPress={this.filterBy}
+                                  style={{
+                                      width: 30,
+                                      justifyContent: 'center',
+                                      borderRadius: 20,
+                                      borderColor: 'grey',
+                                      margin: 6,
+                                  }}
+                            />
                         </View>
                     }
-                    rightComponent={{icon: 'home', color: '#fff'}}
+                    centerComponent={styles.centerComponent}
+                    containerStyle={styles.containerStyle}
+                    rightComponent={{icon: 'home', color: theme.GREY_WHITE}}
                 />
                 <FlatList
                     data={data}

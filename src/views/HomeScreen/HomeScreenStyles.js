@@ -1,7 +1,7 @@
 import {StyleSheet, Dimensions} from 'react-native';
 import theme from '../../theme';
 
-const {height} = Dimensions.get('window');
+const {width,height} = Dimensions.get('window');
 
 const textSize = height > 600 ? 14 : 10;
 
@@ -13,21 +13,17 @@ export default (styles = StyleSheet.create({
         backgroundColor: theme.WHITE,
         marginBottom: 40,
     },
-    logo: {
-        position: 'absolute',
-        top: height / 3,
+    containerStyle: {
+        backgroundColor: theme.WHITE,
+        borderBottomColor: theme.GREY_WHITE,
+        width,
+        paddingVertical: 16,
+        borderBottomWidth: textSize / 8,
     },
-    spinner: {
-        position: 'absolute',
-        top: height / 1.8,
-        margin: 40,
+    centerComponent: {
+        flex:6,
+        backgroundColor:'blue',
+        color:'blue'
     },
 
-    textCopyright: {
-        fontSize: textSize,
-        fontStyle: 'normal',
-        color: theme.DEFAULT,
-        position: 'absolute',
-        bottom: 25,
-    },
 }));
