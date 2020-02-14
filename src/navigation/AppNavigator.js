@@ -23,5 +23,4 @@ const AppNavigator = () => (
     </PersistGate>
   </Provider>
 );
-let MyApp;
 export default (MyApp = AppNavigator);
