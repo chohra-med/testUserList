@@ -21,9 +21,13 @@ export default (styles = StyleSheet.create({
         borderBottomWidth: textSize / 8,
     },
     centerComponent: {
-        flex:6,
-        backgroundColor:'blue',
-        color:'blue'
+        flexDirection: 'row',
+        justifyContent: 'center',
+
     },
+    searchLoop:{
+
+
+    }
 
 }));

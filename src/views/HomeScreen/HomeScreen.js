@@ -54,12 +54,14 @@ class HomeScreen extends Component {
 //to filter our data by NAME
     filterBy() {
         let {
-            generalData,
             nameFiltered,
         } = this.state;
-        let data = generalData;
+        let userList=Object.entries(this.props.users).map(function ([key,v]) {
+            return  v;
+        });
+        let data = userList;
         data = data.filter(x => String(x.name.toUpperCase()).includes(nameFiltered.toUpperCase()));
-        this.setState({ourData: data});
+        this.setState({userList: data});
     }
 
     //to order our data by NAME
@@ -91,14 +93,11 @@ class HomeScreen extends Component {
                 <Header
                     // leftComponent={{icon: 'menu', color: '#fff'}}
                     centerComponent={
-                        <View style={{
-                            flexDirection: 'row',
-                            justifyContent: 'center',
-                            backgroundColor: 'blue',
-                        }}>
+                        <View style={styles.centerComponent}
+                            >
                             <TextInput
                                 style={{
-                                    height: 40, borderWidth: 10, margin: 5, width: '100%',
+                                    height: 40, borderWidth: 2, margin: 5, width: width*0.5,
                                 }}
                                 placeholder={strings('home.filtering')}
                                 value={nameFiltered}
@@ -108,19 +107,13 @@ class HomeScreen extends Component {
                                 }}
                             />
 
-                            <Icon color='black' size={20} name="search"
+                            <Icon color='black' size={18} name="magnify"
                                   onPress={this.filterBy}
-                                  style={{
-                                      width: 30,
-                                      justifyContent: 'center',
-                                      borderRadius: 20,
-                                      borderColor: 'grey',
-                                      margin: 6,
-                                  }}
+
+                                  style={styles.searchLoop}
                             />
                         </View>
                     }
-                    centerComponent={styles.centerComponent}
                     containerStyle={styles.containerStyle}
                     rightComponent={{icon: 'home', color: theme.GREY_WHITE}}
                 />
