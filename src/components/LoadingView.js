@@ -1,5 +1,7 @@
 import React from 'react';
 import {Animated, SafeAreaView, Text} from 'react-native';
+import {LOGO} from '../assets/images';
+import {SPINNER} from '../assets/icons';
 
 class LoadingView extends React.Component {
   constructor(props) {
@@ -39,7 +41,7 @@ class LoadingView extends React.Component {
       <SafeAreaView
         style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <Animated.Image
-          source={require('../assets/icons/spinner.png')}
+            source={SPINNER}
           style={{
             width: 100,
             height: 100,
