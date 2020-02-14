@@ -14,15 +14,14 @@
     "clean-android": "cd android/ && ./gradlew clean && cd .. && npm run android",
     "create-apk": "cd android/ && ./gradlew clean && ./gradlew assembleRelease && cd ..",
     "create-aab": "cd android/ && ./gradlew clean && ./gradlew bundleRelease && cd .."
-
   },
   "dependencies": {
-    "react": "16.9.0",
-    "react-native": "0.61.5",
     "axios": "^0.19.2",
     "lodash": "^4.17.15",
     "npm-check-updates": "^4.0.1",
-    "prop-types": "latest",
+    "prop-types": "^15.7.2",
+    "react": "16.9.0",
+    "react-native": "0.61.5",
     "react-native-elements": "^1.2.7",
     "react-native-i18n": "^2.0.15",
     "react-native-popup-dialog": "^0.18.3",
