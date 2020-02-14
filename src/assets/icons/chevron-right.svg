@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="Groupe_16" width="28.797" height="29.62" data-name="Groupe 16" viewBox="0 0 28.797 29.62">
+    <defs>
+        <style>
+            .cls-1,.cls-2{fill:#fff;stroke:#76236c}.cls-2{fill:#76236c}.cls-3{stroke:none}.cls-4{fill:none}
+        </style>
+    </defs>
+    <g id="Rectangle_2" class="cls-1" data-name="Rectangle 2">
+        <rect width="28.797" height="29.62" class="cls-3" rx="14.399"/>
+        <rect width="27.797" height="28.62" x=".5" y=".5" class="cls-4" rx="13.899"/>
+    </g>
+    <path id="Tracé_11" d="M26.582 16.758a.82.82 0 0 0-.252-.592l-4.937-4.937a.822.822 0 1 0-1.105 1.218l4.312 4.311-4.37 4.367a.823.823 0 0 0 1.163 1.163l4.937-4.937a.82.82 0 0 0 .252-.592z" class="cls-2" data-name="Tracé 11" transform="translate(-8.481 -1.949)"/>
+</svg>
