@@ -17,7 +17,8 @@ import ListUsers from './ListUsers';
 import {Header, Input} from 'react-native-elements';
 import Icon from '../../components/nativeIcon';
 import theme from '../../theme';
-const {width,height} = Dimensions.get('window');
+
+const {width, height} = Dimensions.get('window');
 
 class HomeScreen extends Component {
     constructor(props) {
@@ -37,10 +38,13 @@ class HomeScreen extends Component {
     onRefresh() {
         this.setState({isFetching: true}, async () => {
             await this.props.getUserList();
+            let newUserArray=Object.entries(this.props.users).map(function ([key,v]) {
+                return  v;
+            });
 
             this.setState({
                     isFetching: false,
-                    userList: this.props.users,
+                    userList: newUserArray,
                 },
             );
         });
@@ -69,14 +73,11 @@ class HomeScreen extends Component {
         let {
             users,
         } = this.props;
-        console.log(users);
-
-            let newUserArray=Object.entries(users).map(function ([key,v]) {
-                return  v;
-            });
-            console.log(newUserArray)
+        let newUserArray = Object.entries(users).map(function ([key, v]) {
+            return v;
+        });
         this.setState({
-            userList: newUserArray
+            userList: newUserArray,
         });
     }
 
@@ -138,11 +139,9 @@ class HomeScreen extends Component {
                         <ListUsers data={item}/>
                     }
 
-                    numColumns={2}
-                    columnWrapperStyle={styles.row}
                     keyExtractor={item => item._id.toString()}
                     getItemLayout={(data, index) => (
-                        {length: height * 0.4, offset: height * 0.24, index}
+                        {length: height * 0.2, offset: height * 0.05, index}
                     )}
                     onRefresh={this.onRefresh}
                     refreshing={isFetching}

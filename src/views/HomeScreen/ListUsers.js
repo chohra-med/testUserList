@@ -39,7 +39,9 @@ export default class ListUsers extends PureComponent {
                     <View style={styles.listViewContainer}>
                         <SliderImages
                             onPress={this.onPress}
-                            images={images} heightComponent={0.24} widthComponent={0.9}/>
+                            images={images} heightComponent={0.18}
+                            widthComponent={0.3}
+                        />
                         <View style={styles.textContainer}>
                             <Text style={styles.name}>{name}</Text>
                             <Text style={styles.helps}> {title}</Text>
@@ -71,14 +73,14 @@ const styles = StyleSheet.create({
     listViewContainer: {
         flexDirection: 'row',
         flex: 1,
-        width: '100%',
-        height: 80,
+        width: width,
+        height: height*0.2,
         justifyContent: 'center',
     },
     button: {
-        marginTop: '5%',
+        marginTop: height*0.05,
         position: 'absolute',
-        right: '5%',
+        right: 16,
     },
     name: {
         color: 'black',
