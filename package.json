@@ -16,7 +16,7 @@
     "create-aab": "cd android/ && ./gradlew clean && ./gradlew bundleRelease && cd .."
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "lodash": "^4.17.15",
     "npm-check-updates": "^4.0.1",
     "prop-types": "^15.7.2",
